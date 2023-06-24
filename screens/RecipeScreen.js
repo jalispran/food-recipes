@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Pressable} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import Favorite from '../components/Favorites';
 
 import InfoContainer from '../components/InfoContainer';
 
 export default function RecipeScreen(props) {
   let {route, navigation} = props
-  let {recipeItem} = route.params;
+  let {recipeItem, Srno} = route.params;
   let {
     TranslatedInstructions, 
     TranslatedIngredients, 
@@ -16,7 +17,13 @@ export default function RecipeScreen(props) {
   } = recipeItem
 
   useEffect(() => {
-    navigation.setOptions({ title: recipeItem.TranslatedRecipeName.split('-')[0].split('(')[0] })
+    navigation.setOptions({ 
+      title: recipeItem.TranslatedRecipeName.split('-')[0].split('(')[0],
+      headerRight: () => (
+        <View style={styles.favorite}>
+          <Favorite Srno={Srno} />
+        </View>)
+     })
   }, [])
 
     return (
@@ -98,5 +105,8 @@ export default function RecipeScreen(props) {
       flexDirection: 'row', 
       flexWrap: 'wrap',
       paddingBottom: 10
+    },
+    favorite: {
+      paddingRight: 20,
     }
   })
