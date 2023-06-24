@@ -29,7 +29,7 @@ export default function Favorite({Srno}) {
     try {
       let favorites = await AsyncStorage.getItem('favourite-recipes');
       favorites = JSON.parse(favorites)
-      if (favorites.includes(Srno)) {
+      if (favorites?.includes(Srno)) {
         favorites = favorites.filter(s => Srno != s)
         await AsyncStorage.setItem('favourite-recipes', JSON.stringify(favorites));
       } else {
