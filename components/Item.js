@@ -1,6 +1,5 @@
 import { StyleSheet, Pressable, Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import Favorite from './Favorites';
 
 
 export default function Item(props) {
@@ -22,10 +21,6 @@ export default function Item(props) {
               <Text style={styles.subtitleText}>{Course}</Text>
             </View>
           </View>
-        </View>
-
-        <View>
-          <Favorite Srno={Srno} />
         </View>
       </View>
     </Pressable>

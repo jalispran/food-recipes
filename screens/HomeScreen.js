@@ -25,9 +25,9 @@ export const HomeScreen = ({ navigation }) => {
   }, [])
 
   useEffect(() => {
+    let i = Math.floor(new Date().getDate()/31 * RECIPES_V2.length - 10)
     let featured = RECIPES_V2
-      .sort(() => 0.5 - new Date().getDate() % 100)
-      .slice(0, 10)
+      .slice(i, i + 10)
     setFeaturedRecipes(featured)
   }, [focused])
 
