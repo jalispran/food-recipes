@@ -21,17 +21,17 @@ export default function RecipeScreen(props) {
   const vegIndicators = ['Vegetarian', 'High Protein Vegetarian', 'Vegan', 'No Onion No Garlic (Sattvic)']
   const eggitarian = ['Eggetarian']
 
-  const [dietColor, setDietColor] = useState()
+  const [dietColor, setDietColor] = useState('white')
 
   useEffect(() => {
     if(nonVegIndicators.includes(Diet)) {
       setDietColor('red')
-    } else if(vegIndicators.includes(Diet)) {
+    }
+    if(vegIndicators.includes(Diet)) {
       setDietColor('green')
-    } else if(eggitarian.includes(Diet)) {
+    } 
+    if(eggitarian.includes(Diet)) {
       setDietColor('orange')
-    } else {
-      setDietColor('white')
     }
   }, [dietColor])
 
