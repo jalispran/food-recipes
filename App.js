@@ -32,6 +32,15 @@ function FavoriteStack() {
   )
 }
 
+function SearchStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen options={{headerShown: false}} name="Search Screen" component={SearchScreen} />
+      <Stack.Screen name="Recipe" component={RecipeScreen} />
+    </Stack.Navigator>
+  )
+}
+
 
 export default function App() {
   return (
@@ -61,7 +70,7 @@ export default function App() {
           />
           <Tab.Screen 
             name="Search" 
-            component={SearchScreen} 
+            component={SearchStack} 
             options={{
               headerShown: false,
               tabBarIcon: ({focused}) => (
