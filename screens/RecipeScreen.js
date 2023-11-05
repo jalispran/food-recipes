@@ -26,11 +26,9 @@ export default function RecipeScreen(props) {
   useEffect(() => {
     if(nonVegIndicators.includes(Diet)) {
       setDietColor('red')
-    }
-    if(vegIndicators.includes(Diet)) {
+    } else if(vegIndicators.includes(Diet)) {
       setDietColor('green')
-    }
-    if(eggitarian.includes(Diet)) {
+    } else if(eggitarian.includes(Diet)) {
       setDietColor('orange')
     } else {
       setDietColor('white')
