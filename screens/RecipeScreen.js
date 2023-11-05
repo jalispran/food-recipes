@@ -32,6 +32,8 @@ export default function RecipeScreen(props) {
     }
     if(eggitarian.includes(Diet)) {
       setDietColor('orange')
+    } else {
+      setDietColor('white')
     }
   }, [dietColor])
 
