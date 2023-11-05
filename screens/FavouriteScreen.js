@@ -3,13 +3,10 @@ import { StatusBar } from 'expo-status-bar';
 import { ScrollView, View, Text, FlatList, StyleSheet } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import Item from '../components/Item'
-
 import RECIPES_V2 from '../assets/Indian Food Recipe Dataset - IndianFoodDataset8.json'
 
 export default function FavouriteScreen({ navigation }) {
-
   const [favoriteRecipes, setFavoriteRecipes] = useState([])
 
   useEffect(() => {
