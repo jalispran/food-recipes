@@ -55,7 +55,7 @@ export default function App() {
             options={{
               headerShown: false,
               tabBarIcon: ({focused}) => (
-              focused ? <MaterialIcons name="favorite" size={25} color="black" />
+              focused ? <MaterialIcons name="favorite" size={25} color="red" />
               : <MaterialIcons name="favorite-border" size={25} color="black" />)
             }}
           />

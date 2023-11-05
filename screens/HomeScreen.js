@@ -5,7 +5,6 @@ import { useIsFocused } from "@react-navigation/native";
 
 import { MaterialIcons } from '@expo/vector-icons';
 
-import RECIPES from '../assets/recipes.json'
 import RECIPES_V2 from '../assets/Indian Food Recipe Dataset - IndianFoodDataset8.json'
 import Item from '../components/Item'
 

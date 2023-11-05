@@ -45,7 +45,7 @@ export default function Favorite({Srno}) {
     <Pressable onPress={() => addOrRemoveFromFavourites(Srno)}>
       {favs?.includes(Srno) ? (
         <View style={styles.favorite}>
-          <MaterialIcons name="favorite" size={25} color="black" />
+          <MaterialIcons name="favorite" size={25} color="red" />
         </View>
       ) : (
         <View style={styles.favorite}>

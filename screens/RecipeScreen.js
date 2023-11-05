@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Pressable} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-import Favorite from '../components/Favorites';
 
+import Favorite from '../components/Favorites';
 import InfoContainer from '../components/InfoContainer';
 
 export default function RecipeScreen(props) {
@@ -12,24 +12,51 @@ export default function RecipeScreen(props) {
     TranslatedInstructions, 
     TranslatedIngredients, 
     Diet, 
+    PrepTimeInMins,
+    CookTimeInMins,
     TotalTimeInMins,
     Servings
   } = recipeItem
+  const nonVegIndicators = ['Non Vegeterian', 'High Protein Non Vegetarian' ]
+  const vegIndicators = ['Vegetarian', 'High Protein Vegetarian', 'Vegan', 'No Onion No Garlic (Sattvic)']
+  const eggitarian = ['Eggetarian']
+
+  const [dietColor, setDietColor] = useState()
+
+  useEffect(() => {
+    if(nonVegIndicators.includes(Diet)) {
+      setDietColor('red')
+    }
+    if(vegIndicators.includes(Diet)) {
+      setDietColor('green')
+    }
+    if(eggitarian.includes(Diet)) {
+      setDietColor('orange')
+    }
+  }, [dietColor])
 
   useEffect(() => {
     navigation.setOptions({ 
       title: recipeItem.TranslatedRecipeName.split('-')[0].split('(')[0],
       headerRight: () => (
-        <View style={styles.favorite}>
+        <View style={styles.headerRight}>
+          <View style={{...styles.dietIndicator, 
+            borderColor: dietColor,
+            backgroundColor: dietColor,
+          }}/>
           <Favorite Srno={Srno} />
         </View>)
      })
-  }, [])
+  }, [navigation, dietColor])
 
     return (
       <View style={styles.container}>
         <IngredientsContainer TranslatedIngredients={TranslatedIngredients} />
-        <InfoContainer TotalTimeInMins={TotalTimeInMins} Servings={Servings} Diet={Diet} />
+        <InfoContainer 
+          Servings={Servings} 
+          PrepTimeInMins={PrepTimeInMins}
+          CookTimeInMins={CookTimeInMins}
+        />
         <View style={{paddingTop: 10}}>
           <Text>{TranslatedInstructions}</Text>
         </View>
@@ -106,7 +133,14 @@ export default function RecipeScreen(props) {
       flexWrap: 'wrap',
       paddingBottom: 10
     },
-    favorite: {
+    headerRight: {
       paddingRight: 20,
+      flexDirection: 'row',
+      alignItems: 'center',
+    }, 
+    dietIndicator: {
+      flex:1,
+      borderWidth: 10,
+      borderRadius: 10,
     }
   })
