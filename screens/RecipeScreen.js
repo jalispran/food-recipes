@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Pressable} from 'react-native';
+import { StyleSheet, Text, View, Pressable, ScrollView} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 import Favorite from '../components/Favorites';
@@ -22,6 +22,7 @@ export default function RecipeScreen(props) {
   const eggitarian = ['Eggetarian']
 
   const [dietColor, setDietColor] = useState('white')
+  const [recipeProcess, setRecipeProcess] = useState([])
 
   useEffect(() => {
     if(nonVegIndicators.includes(Diet)) {
@@ -34,6 +35,11 @@ export default function RecipeScreen(props) {
       setDietColor('orange')
     }
   }, [dietColor])
+
+  useEffect(() => {
+    const instructions = TranslatedInstructions.split('.')
+    setRecipeProcess(instructions)
+  }, [])
 
   useEffect(() => {
     navigation.setOptions({ 
@@ -51,15 +57,20 @@ export default function RecipeScreen(props) {
 
     return (
       <View style={styles.container}>
-        <IngredientsContainer TranslatedIngredients={TranslatedIngredients} />
-        <InfoContainer 
-          Servings={Servings} 
-          PrepTimeInMins={PrepTimeInMins}
-          CookTimeInMins={CookTimeInMins}
-        />
-        <View style={{paddingTop: 10}}>
-          <Text>{TranslatedInstructions}</Text>
-        </View>
+        <ScrollView>
+          <IngredientsContainer TranslatedIngredients={TranslatedIngredients} />
+          <InfoContainer 
+            Servings={Servings} 
+            Diet={Diet}
+            PrepTimeInMins={PrepTimeInMins}
+            CookTimeInMins={CookTimeInMins}
+          />
+          {
+            recipeProcess
+              .filter(step => !!step)
+              .map((step, idx) => <Text style={{padding: 10}}>{`${idx+1} : ${step}`}</Text>)
+          }
+        </ScrollView>
       </View>
     )
   }

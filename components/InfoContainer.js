@@ -1,12 +1,18 @@
 import * as React from 'react'
 import { StyleSheet, Text, View} from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons'; 
+import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'; 
 
-const InfoContainer = ({PrepTimeInMins, CookTimeInMins, Servings}) => {
+
+const InfoContainer = ({PrepTimeInMins, CookTimeInMins, Diet, Servings}) => {
     return (
       <View style={styles.container}>
         <View style={styles.infoContainer}>
           <CookingTimer CookTimeInMins={CookTimeInMins} PrepTimeInMins={PrepTimeInMins}/>
+        </View>
+
+        <View style={{...styles.infoContainer, justifyContent: 'center'}}>
+          <MaterialCommunityIcons name="food-variant" size={20} color="black" />
+          <Text style={styles.text}>{Diet}</Text>
         </View>
 
         <View style={{...styles.infoContainer, justifyContent: 'center'}}>
