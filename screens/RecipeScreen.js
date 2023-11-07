@@ -4,6 +4,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import Favorite from '../components/Favorites';
 import InfoContainer from '../components/InfoContainer';
+import DietIndicator from '../components/DietIndicator';
 
 export default function RecipeScreen(props) {
   let {route, navigation} = props
@@ -17,24 +18,8 @@ export default function RecipeScreen(props) {
     TotalTimeInMins,
     Servings
   } = recipeItem
-  const nonVegIndicators = ['Non Vegeterian', 'High Protein Non Vegetarian' ]
-  const vegIndicators = ['Vegetarian', 'High Protein Vegetarian', 'Vegan', 'No Onion No Garlic (Sattvic)']
-  const eggitarian = ['Eggetarian']
 
-  const [dietColor, setDietColor] = useState('white')
   const [recipeProcess, setRecipeProcess] = useState([])
-
-  useEffect(() => {
-    if(nonVegIndicators.includes(Diet)) {
-      setDietColor('red')
-    }
-    if(vegIndicators.includes(Diet)) {
-      setDietColor('green')
-    } 
-    if(eggitarian.includes(Diet)) {
-      setDietColor('orange')
-    }
-  }, [dietColor])
 
   useEffect(() => {
     const instructions = TranslatedInstructions.split('.')
@@ -46,14 +31,11 @@ export default function RecipeScreen(props) {
       title: recipeItem.TranslatedRecipeName.split('-')[0].split('(')[0],
       headerRight: () => (
         <View style={styles.headerRight}>
-          <View style={{...styles.dietIndicator, 
-            borderColor: dietColor,
-            backgroundColor: dietColor,
-          }}/>
+          <DietIndicator Diet={Diet} />
           <Favorite Srno={Srno} />
         </View>)
      })
-  }, [navigation, dietColor])
+  }, [navigation])
 
     return (
       <View style={styles.container}>
@@ -67,8 +49,9 @@ export default function RecipeScreen(props) {
           />
           {
             recipeProcess
+              .slice(0, -1)
               .filter(step => !!step)
-              .map((step, idx) => <Text style={{padding: 10}}>{`${idx+1} : ${step}`}</Text>)
+              .map((step, idx) => <Text key={idx} style={{padding: 10}}>{`${idx+1} : ${step}`}</Text>)
           }
         </ScrollView>
       </View>
@@ -149,9 +132,4 @@ export default function RecipeScreen(props) {
       flexDirection: 'row',
       alignItems: 'center',
     }, 
-    dietIndicator: {
-      flex:1,
-      borderWidth: 10,
-      borderRadius: 10,
-    }
   })
