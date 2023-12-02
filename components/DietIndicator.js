@@ -5,17 +5,29 @@ const nonVegIndicators = ['Non Vegeterian', 'High Protein Non Vegetarian']
 const vegIndicators = ['Vegetarian', 'High Protein Vegetarian', 'Vegan', 'No Onion No Garlic (Sattvic)']
 const eggitarian = ['Eggetarian']
 
+export const isVeg = (Diet) => {
+  return vegIndicators.includes(Diet)
+}
+
+export const isNonVeg = (Diet) => {
+  return nonVegIndicators.includes(Diet)
+}
+
+export const isEggitarian = (Diet) => {
+  return eggitarian.includes(Diet)
+}
+
 export default function DietIndicator({Diet, size=10}) {
   const [dietColor, setDietColor] = useState('white')
 
   useEffect(() => {
-    if (nonVegIndicators.includes(Diet)) {
+    if (isNonVeg(Diet)) {
       setDietColor('red')
     }
-    if (vegIndicators.includes(Diet)) {
+    if (isVeg(Diet)) {
       setDietColor('green')
     }
-    if (eggitarian.includes(Diet)) {
+    if (isEggitarian(Diet)) {
       setDietColor('orange')
     }
   }, [dietColor])
